@@ -9,4 +9,10 @@ def total_size(node):
       - dir:  {"type": "dir", "name": str, "children": [nodes]}
     """
     # TODO: implement recursively
-    raise NotImplementedError
+    if node and node.get("type") == "file":
+        return node.get("size", 0)
+
+    if node and node.get("type") == "dir":
+        return sum(total_size(child) for child in node.get("children", []))
+
+    return 0
